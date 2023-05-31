@@ -5,6 +5,10 @@ import BadRequestError from '../error/BadRequestError'
 
 class TutorService {
   create(payload: ITutor) {
+    const allTutors = this.get()
+    allTutors.forEach((value) => {
+      if (value.id === payload.id) throw new BadRequestError('Id already exists')
+    })
 
     TutorRepository.create(payload);
   }
