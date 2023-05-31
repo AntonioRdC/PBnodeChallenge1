@@ -5,5 +5,6 @@ import createValidation from '../app/validations/tutor/create';
 const router = Router();
 
 router.post('/tutor', TutorController.create);
+router.get('/tutors', TutorController.get);
 
 export default router;

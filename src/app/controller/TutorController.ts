@@ -10,6 +10,15 @@ class TutorController {
         return res.status(500).json({ error });
       }
     }
+
+    get(req: Request, res: Response) {
+      try {
+        const result = TutorService.get();
+        return res.status(200).json(result);
+      } catch (error) {
+        return res.status(500).json({ error });
+      }
+    }
 }
 
 export default new TutorController();
