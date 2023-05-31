@@ -52,7 +52,6 @@ $ npm run dev
 ### Tutor Endpoints
 |               Route              |    Method    |               Description                 |
 |   ----------------------------   | :----------: |  ---------------------------------------  |
-|  `/api-docs`                     |    GET       |  Get Documentation in Swagger             |
 |  `/tutors`                       |    GET       |  Retrieves all tutors                     |
 |  `/tutor`                        |    POST      |  Create a new tutor                       |
 |  `/tutor/:id`                    |    PUT       |  Updates a tutor                          |
@@ -113,6 +112,6 @@ $ npm run dev
 ```
 
 
-## Autor
+## Author
 <img src="https://avatars.githubusercontent.com/AntonioRdC" width=115>  
 <a href="https://github.com/AntonioRdC">Antonio Carvalho</a>
