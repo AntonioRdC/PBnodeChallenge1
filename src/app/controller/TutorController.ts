@@ -1,7 +1,11 @@
+import { Request, Response } from 'express'
+import TutorService from '../service/TutorService';
+
 class TutorController {
-    async create(req, res) {
+    create(req: Request, res: Response) {
       try {
-        return res.status(201).json({});
+        TutorService.create(req.body);
+        return res.status(201).json(req.body);
       } catch (error) {
         return res.status(500).json({ error });
       }
