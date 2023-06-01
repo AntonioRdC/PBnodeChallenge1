@@ -6,6 +6,6 @@ const router = Router();
 
 router.post('/pet/:tutorId', PetController.create);
 router.put('/pet/:petId/tutor/:tutorId', PetController.put);
-
+router.delete('/pet/:petId/tutor/:tutorId', PetController.delete);
 
 export default router;

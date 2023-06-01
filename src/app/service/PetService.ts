@@ -32,6 +32,22 @@ class PetService {
     if (!result) throw new BadRequestError('Id not exists')
     return result
   }
+
+  delete(tutorId: string, petId: string) {
+    const allTutors = TutorRepository.get()
+    let result = false
+    allTutors.forEach((value, index) => {
+      if (value.id === Number(tutorId)) {
+        const indexTutor = index
+        value.pets?.forEach((value, index) => {
+          if (value.id === Number(petId)) {
+            result = PetRepository.delete(indexTutor, index);
+          }
+        })
+      }
+    })
+    if (!result) throw new BadRequestError('Id not exists')
+  }
 }
 
 export default new PetService();

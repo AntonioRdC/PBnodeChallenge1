@@ -20,6 +20,11 @@ class TutorRepository {
     TutorSchema[tutorId].pets?.splice(petId, 1, payload)
     return TutorSchema[tutorId]
   }
+
+  delete(tutorId: number, petId: number) {
+    TutorSchema[tutorId].pets?.splice(petId, 1)
+    return true
+  }
 }
 
 export default new TutorRepository();
