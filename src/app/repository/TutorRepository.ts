@@ -25,6 +25,17 @@ class TutorRepository {
     if (IdNotExists) throw new NotFoundError('Id Not exists')
     return payload
   }
+  
+  delete(id: string) {
+    let IdNotExists = true
+    TutorSchema.forEach((value, index) => {
+      if (value.id === Number(id)) {
+        IdNotExists = false
+        TutorSchema.splice(index, 1)
+      }
+    })
+    if (IdNotExists) throw new NotFoundError('Id Not exists')
+  }
 }
 
 export default new TutorRepository();

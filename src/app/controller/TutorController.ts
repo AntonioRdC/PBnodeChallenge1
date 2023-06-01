@@ -29,6 +29,16 @@ class TutorController {
         return res.status(500).json({ error });
       }
     }
+
+    delete(req: Request, res: Response) {
+      try {
+        const { id } = req.params
+        TutorService.delete(id);
+        return res.status(200).json();
+      } catch (error) {
+        return res.status(500).json({ error });
+      }
+    }
 }
 
 export default new TutorController();

@@ -22,6 +22,10 @@ class TutorService {
   put(id: string, payload: ITutor): ITutor  {
     return TutorRepository.put(id, payload);
   }
+
+  delete(id: string)  {
+    TutorRepository.delete(id);
+  }
 }
 
 export default new TutorService();
