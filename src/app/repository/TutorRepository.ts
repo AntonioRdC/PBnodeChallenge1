@@ -4,23 +4,26 @@ import TutorSchema from '../schema/TutorSchema';
 import NotFoundError from '../error/NotFoundError'
 
 class TutorRepository {
-  create(payload: ITutor) {
+  create(payload: ITutor): ITutor {
     TutorSchema.push(payload);
+    return payload
   }
 
-  get() {
+  get(): Array<ITutor> {
     return TutorSchema;
   }
 
-  put(id: string, payload: ITutor) {
+  put(id: string, payload: ITutor): ITutor {
     let IdNotExists = true
     TutorSchema.forEach((value, index) => {
       if (value.id === Number(id)) {
         IdNotExists = false
-        return TutorSchema[index] = payload
+        TutorSchema[index] = payload
+        return TutorSchema[index]
       }
     })
     if (IdNotExists) throw new NotFoundError('Id Not exists')
+    return payload
   }
 }
 

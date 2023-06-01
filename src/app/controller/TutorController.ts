@@ -4,8 +4,8 @@ import TutorService from '../service/TutorService';
 class TutorController {
     create(req: Request, res: Response) {
       try {
-        TutorService.create(req.body);
-        return res.status(201).json(req.body);
+        const result = TutorService.create(req.body);
+        return res.status(201).json(result);
       } catch (error) {
         return res.status(500).json({ error });
       }
@@ -23,8 +23,8 @@ class TutorController {
     put(req: Request, res: Response) {
       try {
         const { id } = req.params
-        TutorService.put(id, req.body);
-        return res.status(200).json(req.body);
+        const result = TutorService.put(id, req.body);
+        return res.status(200).json(result);
       } catch (error) {
         return res.status(500).json({ error });
       }
