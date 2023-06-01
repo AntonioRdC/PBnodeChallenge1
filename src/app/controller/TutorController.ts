@@ -1,4 +1,4 @@
-import { Request, Response } from 'express'
+import { Request, Response } from 'express';
 import TutorService from '../service/TutorService';
 
 class TutorController {
