@@ -16,6 +16,10 @@ class TutorService {
   get(): Array<ITutor> {
     return TutorRepository.get();
   }
+
+  put(id: string, payload: ITutor) {
+    TutorRepository.put(id, payload);
+  }
 }
 
 export default new TutorService();

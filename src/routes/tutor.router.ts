@@ -6,5 +6,6 @@ const router = Router();
 
 router.post('/tutor', TutorController.create);
 router.get('/tutors', TutorController.get);
+router.put('/tutor/:id', TutorController.put);
 
 export default router;
