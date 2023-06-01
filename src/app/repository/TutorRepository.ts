@@ -1,10 +1,15 @@
 import { ITutor } from '../interfaces/ITutor';
 import TutorSchema from '../schema/TutorSchema';
 
-import NotFoundError from '../error/NotFoundError'
+import NotFoundError from '../error/NotFoundError';
+import BadRequestError from '../error/BadRequestError';
 
 class TutorRepository {
   create(payload: ITutor): ITutor {
+    TutorSchema.forEach((value) => {
+      if (value.id === payload.id) throw new BadRequestError('Id already exists');
+    });
+
     TutorSchema.push(payload);
     return payload
   }
@@ -14,27 +19,29 @@ class TutorRepository {
   }
 
   put(id: string, payload: ITutor): ITutor {
-    let IdNotExists = true
-    TutorSchema.forEach((value, index) => {
-      if (value.id === Number(id)) {
-        IdNotExists = false
-        TutorSchema[index] = payload
-        return TutorSchema[index]
-      }
+    const indexTutor = TutorSchema.findIndex(value => {
+      if (value.id === Number(id)) return value
     })
-    if (IdNotExists) throw new NotFoundError('Id Not exists')
+
+    TutorSchema.forEach((value) => {
+      if (value.id === payload.id && !(value.id === TutorSchema[indexTutor].id)) {
+        throw new BadRequestError('Id already exists');
+      }
+    });
+
+    if (indexTutor === -1) throw new NotFoundError('Id Not exists')
+    TutorSchema[indexTutor] = payload
     return payload
   }
-  
+
   delete(id: string) {
-    let IdNotExists = true
-    TutorSchema.forEach((value, index) => {
-      if (value.id === Number(id)) {
-        IdNotExists = false
-        TutorSchema.splice(index, 1)
-      }
+    const indexTutor = TutorSchema.findIndex(value => {
+      if (value.id === Number(id)) return value
     })
-    if (IdNotExists) throw new NotFoundError('Id Not exists')
+
+    TutorSchema.splice(indexTutor, 1)
+
+    if (indexTutor === -1) throw new NotFoundError('Id Not exists')
   }
 }
 
