@@ -5,15 +5,20 @@ import TutorSchema from '../schema/TutorSchema';
 import NotFoundError from '../error/NotFoundError';
 
 class TutorRepository {
-  create(index: number, payload: IPet): IPet {
-    const tutor = TutorSchema[index].pets
+  create(tutorId: number, payload: IPet): ITutor {
+    const tutor = TutorSchema[tutorId].pets
     if (tutor) {
       tutor.push(payload)
-      TutorSchema[index] = Object.assign(TutorSchema[index], { pets: tutor })
+      TutorSchema[tutorId] = Object.assign(TutorSchema[tutorId], { pets: tutor })
     } else {
-      TutorSchema[index] = Object.assign(TutorSchema[index], { pets: [payload] })
+      TutorSchema[tutorId] = Object.assign(TutorSchema[tutorId], { pets: [payload] })
     }
-    return payload
+    return TutorSchema[tutorId]
+  }
+  
+  put(tutorId: number, petId: number, payload: IPet): ITutor {
+    TutorSchema[tutorId].pets?.splice(petId, 1, payload)
+    return TutorSchema[tutorId]
   }
 }
 
