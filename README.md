@@ -2,7 +2,7 @@
   <img alt="compass logo" src="https://user-images.githubusercontent.com/65569815/176964539-fe858838-0d07-418e-9220-b6d94461ecee.png" />
 </p>
 
-# Compass Store
+# Compass Tutor MicroService
 
 Final Challenge of the **NodeJS Scholl Program from [Compass.uol](https://compass.uol/)**.
 
@@ -100,7 +100,7 @@ $ npm run dev
 | `date_of_birth`          | String    | true     | false  |
 
 ```bash
-# Example Tutor .json
+# Example Pet .json
 { 
     id: 1, 
     name: "Lilo", 
