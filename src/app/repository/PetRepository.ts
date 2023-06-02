@@ -51,9 +51,21 @@ class TutorRepository {
     return TutorSchema[indexTutor]
   }
 
-  delete(tutorId: number, petId: number) {
-    TutorSchema[tutorId].pets?.splice(petId, 1)
-    return true
+  delete(tutorId: string, petId: string) {
+    const indexTutor = TutorSchema.findIndex(value => {
+      if (value.id === Number(tutorId)) return value
+    })
+    if (indexTutor === -1) throw new NotFoundError('Id Tutor not exists')
+
+    const tutorPets = TutorSchema[indexTutor].pets
+    if (tutorPets) {
+      const indexPet = tutorPets.findIndex(value => {
+        if (value.id === Number(petId)) return value
+      })
+      if (indexPet === -1) throw new NotFoundError('Id Pet not exists')
+
+      TutorSchema[indexTutor].pets?.splice(indexPet, 1)
+    }
   }
 }
 
