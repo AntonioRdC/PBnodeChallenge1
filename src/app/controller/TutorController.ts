@@ -7,7 +7,10 @@ class TutorController {
         const result = TutorService.create(req.body);
         return res.status(201).json(result);
       } catch (error) {
-        return res.status(500).json({ error });
+        return res.status(error.statusCode).json({
+          message: error.name,
+          details: error.message
+        })
       }
     }
 
@@ -16,7 +19,10 @@ class TutorController {
         const result = TutorService.get();
         return res.status(200).json(result);
       } catch (error) {
-        return res.status(500).json({ error });
+        return res.status(error.statusCode).json({
+          message: error.name,
+          details: error.message
+        })
       }
     }
 
@@ -26,7 +32,10 @@ class TutorController {
         const result = TutorService.put(id, req.body);
         return res.status(200).json(result);
       } catch (error) {
-        return res.status(500).json({ error });
+        return res.status(error.statusCode).json({
+          message: error.name,
+          details: error.message
+        })
       }
     }
 
@@ -36,7 +45,10 @@ class TutorController {
         TutorService.delete(id);
         return res.status(200).json();
       } catch (error) {
-        return res.status(500).json({ error });
+        return res.status(error.statusCode).json({
+          message: error.name,
+          details: error.message
+        })
       }
     }
 }

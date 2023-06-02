@@ -22,6 +22,7 @@ class TutorRepository {
     const indexTutor = TutorSchema.findIndex(value => {
       if (value.id === Number(id)) return value
     })
+    if (indexTutor === -1) throw new NotFoundError('Id Not exists')
 
     TutorSchema.forEach((value) => {
       if (value.id === payload.id && !(value.id === TutorSchema[indexTutor].id)) {
@@ -29,7 +30,6 @@ class TutorRepository {
       }
     });
 
-    if (indexTutor === -1) throw new NotFoundError('Id Not exists')
     TutorSchema[indexTutor] = payload
     return payload
   }
@@ -38,10 +38,9 @@ class TutorRepository {
     const indexTutor = TutorSchema.findIndex(value => {
       if (value.id === Number(id)) return value
     })
+    if (indexTutor === -1) throw new NotFoundError('Id Not exists')
 
     TutorSchema.splice(indexTutor, 1)
-
-    if (indexTutor === -1) throw new NotFoundError('Id Not exists')
   }
 }
 
