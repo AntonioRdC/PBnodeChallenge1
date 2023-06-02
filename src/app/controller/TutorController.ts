@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import TutorService from '../service/TutorService';
 
 class TutorController {
-    create(req: Request, res: Response) {
+    create(req: Request, res: Response): Response {
       try {
         const result = TutorService.create(req.body);
         return res.status(201).json(result);
@@ -14,7 +14,7 @@ class TutorController {
       }
     }
 
-    get(req: Request, res: Response) {
+    get(req: Request, res: Response): Response {
       try {
         const result = TutorService.get();
         return res.status(200).json(result);
@@ -26,7 +26,7 @@ class TutorController {
       }
     }
 
-    put(req: Request, res: Response) {
+    put(req: Request, res: Response): Response {
       try {
         const { id } = req.params
         const result = TutorService.put(id, req.body);
@@ -39,7 +39,7 @@ class TutorController {
       }
     }
 
-    delete(req: Request, res: Response) {
+    delete(req: Request, res: Response): Response {
       try {
         const { id } = req.params
         TutorService.delete(id);
