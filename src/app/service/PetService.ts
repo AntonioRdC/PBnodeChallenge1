@@ -6,14 +6,8 @@ import PetRepository from '../repository/PetRepository';
 import BadRequestError from '../error/BadRequestError';
 
 class PetService {
-  create(tutorId: string, payload: IPet): IPet {
-    const allTutors = TutorRepository.get()
-    let result
-    allTutors.forEach((value, index) => {
-      if (value.id === Number(tutorId)) return result = PetRepository.create(index, payload);
-    })
-    if (!result) throw new BadRequestError('Id not exists')
-    return result
+  create(tutorId: string, payload: IPet): ITutor {
+    return PetRepository.create(tutorId, payload);
   }
 
   put(tutorId: string, petId: string, payload: IPet): ITutor {
