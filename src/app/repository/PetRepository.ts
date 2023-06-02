@@ -27,9 +27,28 @@ class TutorRepository {
     return TutorSchema[indexTutor]
   }
   
-  put(tutorId: number, petId: number, payload: IPet): ITutor {
-    TutorSchema[tutorId].pets?.splice(petId, 1, payload)
-    return TutorSchema[tutorId]
+  put(tutorId: string, petId: string, payload: IPet): ITutor {
+    const indexTutor = TutorSchema.findIndex(value => {
+      if (value.id === Number(tutorId)) return value
+    })
+    if (indexTutor === -1) throw new NotFoundError('Id Tutor not exists')
+
+    const tutorPets = TutorSchema[indexTutor].pets
+    if (tutorPets) {
+      const indexPet = tutorPets.findIndex(value => {
+        if (value.id === Number(petId)) return value
+      })
+      if (indexPet === -1) throw new NotFoundError('Id Pet not exists')
+
+      tutorPets.forEach((value) => {
+        if (value.id === payload.id && !(value.id === tutorPets[indexTutor].id)) {
+          throw new BadRequestError('Id already exists');
+        }
+      });
+      
+      TutorSchema[indexTutor].pets?.splice(indexPet, 1, payload)
+    }
+    return TutorSchema[indexTutor]
   }
 
   delete(tutorId: number, petId: number) {

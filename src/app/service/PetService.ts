@@ -11,20 +11,7 @@ class PetService {
   }
 
   put(tutorId: string, petId: string, payload: IPet): ITutor {
-    const allTutors = TutorRepository.get()
-    let result
-    allTutors.forEach((value, index) => {
-      if (value.id === Number(tutorId)) {
-        const indexTutor = index
-        value.pets?.forEach((value, index) => {
-          if (value.id === Number(petId)) {
-            result = PetRepository.put(indexTutor, index, payload);
-          }
-        })
-      }
-    })
-    if (!result) throw new BadRequestError('Id not exists')
-    return result
+    return PetRepository.put(tutorId, petId, payload);
   }
 
   delete(tutorId: string, petId: string) {
