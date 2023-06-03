@@ -20,10 +20,14 @@ class App {
 
   private middlewares(): void {
     this.server.use(express.json({}));
-    this.server.use('/api/v1/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs))
+    this.server.use(
+      '/api/v1/api-docs',
+      swaggerUI.serve,
+      swaggerUI.setup(swaggerDocs)
+    );
     this.server.use(
       express.urlencoded({
-        extended: true
+        extended: true,
       })
     );
     this.server.use(cors());

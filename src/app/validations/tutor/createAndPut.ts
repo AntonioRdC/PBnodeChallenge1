@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from 'express'
-import Joi from 'joi'
+import type { Request, Response, NextFunction } from 'express';
+import Joi from 'joi';
 
-export default async (req: Request, res: Response, next: NextFunction) => {
+export default (req: Request, res: Response, next: NextFunction): void => {
   try {
     const schema = Joi.object({
       id: Joi.number().required().integer(),
@@ -9,17 +9,19 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       phone: Joi.string().required().trim(),
       email: Joi.string().required().trim(),
       date_of_birth: Joi.string().required().trim(),
-      zip_code: Joi.number().required()
-    })
+      zip_code: Joi.number().required(),
+    });
 
-    const { error } = await schema.validateAsync(req.body, { abortEarly: false, debug: true })
-    if (error) throw error
+    schema.validate(req.body, {
+      abortEarly: false,
+      debug: true,
+    });
 
-    return next()
+    next();
   } catch (error) {
-    return res.status(400).json({
+    res.status(400).json({
       message: error.name,
-      details: error.details
-    })
+      details: error.details,
+    });
   }
-}
+};
