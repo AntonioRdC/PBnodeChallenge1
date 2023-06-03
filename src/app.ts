@@ -1,6 +1,9 @@
 import express from 'express';
 import cors from 'cors';
+import swaggerUI from 'swagger-ui-express';
+
 import routes from './routes/index.router';
+import swaggerDocs from './swagger.json';
 
 class App {
   public server: express.Application;
@@ -17,6 +20,7 @@ class App {
 
   private middlewares(): void {
     this.server.use(express.json({}));
+    this.server.use('/api/v1/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs))
     this.server.use(
       express.urlencoded({
         extended: true

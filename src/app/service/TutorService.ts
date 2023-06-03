@@ -3,6 +3,9 @@ import TutorRepository from '../repository/TutorRepository';
 
 class TutorService {
   create(payload: ITutor): ITutor {
+    payload.id = Number(payload.id)
+    payload.zip_code = Number(payload.zip_code)
+
     return TutorRepository.create(payload);
   }
 
@@ -11,6 +14,9 @@ class TutorService {
   }
 
   put(id: string, payload: ITutor): ITutor  {
+    payload.id = Number(payload.id)
+    payload.zip_code = Number(payload.zip_code)
+
     return TutorRepository.put(id, payload);
   }
 
