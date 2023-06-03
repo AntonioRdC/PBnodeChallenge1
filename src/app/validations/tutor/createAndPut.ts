@@ -12,10 +12,12 @@ export default (req: Request, res: Response, next: NextFunction): void => {
       zip_code: Joi.number().required(),
     });
 
-    schema.validate(req.body, {
+    const { error } = schema.validate(req.body, {
       abortEarly: false,
       debug: true,
     });
+
+    if (!(error === undefined)) throw error;
 
     next();
   } catch (error) {
